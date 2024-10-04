@@ -1,0 +1,43 @@
+#include <QApplication>
+#include <QWidget>
+#include <QLabel>
+#include <QRadioButton>
+#include <QPushButton>
+#include <QGridLayout>
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    // Создаем главное окно
+    QWidget window;
+    window.setWindowTitle("Плесень");
+
+    // Создаем текстовую метку
+    QLabel *label = new QLabel("Плесень");
+
+    // Создаем переключатели
+    QRadioButton *addMildewButton = new QRadioButton("Прибавление плесени");
+    QRadioButton *removeMildewButton = new QRadioButton("Отмирание плесени");
+
+    // Создаем кнопку "Выход"
+    QPushButton *exitButton = new QPushButton("Выход");
+
+    // Создаем компоновку сетки
+    QGridLayout *layout = new QGridLayout;
+    layout->addWidget(label, 0, 0, 1, 2); // Добавляем метку в сетку
+    layout->addWidget(addMildewButton, 1, 0); // Добавляем переключатель "Прибавление плесени"
+    layout->addWidget(removeMildewButton, 1, 1); // Добавляем переключатель "Отмирание плесени"
+    layout->addWidget(exitButton, 2, 0, 1, 2); // Добавляем кнопку "Выход"
+
+    // Устанавливаем компоновку для главного окна
+    window.setLayout(layout);
+
+    // Подключаем сигнал нажатия кнопки "Выход" к слоту закрытия приложения
+    QObject::connect(exitButton, &QPushButton::clicked, &app, &QApplication::quit);
+
+    // Показываем главное окно
+    window.show();
+
+    return app.exec();
+}
